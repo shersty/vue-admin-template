@@ -43,6 +43,7 @@ module.exports = app => {
   var mockStartIndex = mockRoutes.mockStartIndex
 
   // watch files, hot reload mock server
+  // 监听文件 热更新服务器
   chokidar.watch(mockDir, {
     ignored: /mock-server/,
     ignoreInitial: true
@@ -50,6 +51,7 @@ module.exports = app => {
     if (event === 'change' || event === 'add') {
       try {
         // remove mock routes stack
+        // 删除文件映射路由堆栈
         app._router.stack.splice(mockStartIndex, mockRoutesLength)
 
         // clear routes cache

@@ -44,13 +44,14 @@ export function mockXHR() {
       return Mock.mock(result)
     }
   }
-
+  // 批量注册路由事件
   for (const i of mocks) {
     Mock.mock(new RegExp(i.url), i.type || 'get', XHR2ExpressReqWrap(i.response))
   }
 }
 
 // for mock server
+// 返回对应请求值，针对中间件
 const responseFake = (url, type, respond) => {
   return {
     url: new RegExp(`${process.env.VUE_APP_BASE_API}${url}`),

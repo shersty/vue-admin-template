@@ -23,6 +23,16 @@ const users = {
   }
 }
 
+const suitList = [
+  {
+    name: 'suit1',
+    api: '/test'
+  },{
+    name: 'suit2',
+    api: '/test/login'
+  }
+]
+
 export default [
   // user login
   {
@@ -79,6 +89,17 @@ export default [
       return {
         code: 20000,
         data: 'success'
+      }
+    }
+  },
+
+  {
+    url: '/vue-admin-template/suit/list',
+    type: 'get',
+    response: _ => {
+      return {
+        code: 20000,
+        data: suitList,
       }
     }
   }
