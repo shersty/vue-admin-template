@@ -25,11 +25,11 @@ const users = {
 
 const suitList = [
   {
-    name: 'suit1',
-    api: '/test'
-  },{
-    name: 'suit2',
-    api: '/test/login'
+    desc: 'suit1',
+    id: '/test/processSeResponse'
+  }, {
+    desc: 'suit2',
+    id: '/test/login'
   }
 ]
 
@@ -99,7 +99,7 @@ export default [
     response: _ => {
       return {
         code: 20000,
-        data: suitList,
+        data: suitList
       }
     }
   }

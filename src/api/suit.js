@@ -1,7 +1,8 @@
 import request from '@/utils/request'
 
-export default getSuitList(params){
-    return request({
-        url: '/vue-admin-template/suit/list'
-    })
+export function getSuitList() {
+  return request({
+    url: '/vue-admin-template/suit/list',
+    method: 'get'
+  })
 }
