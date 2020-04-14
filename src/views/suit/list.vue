@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-table
+    <!-- <el-table
       :data="suitList"
       style="width: 100%"
     >
@@ -11,7 +11,7 @@
         :label="label"
       />
     </el-table>
-    <el-divider />
+    <el-divider /> -->
     <el-collapse accordion="true">
       <el-collapse-item
         v-for="suit in suitList"

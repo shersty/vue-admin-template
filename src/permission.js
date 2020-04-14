@@ -32,7 +32,8 @@ router.beforeEach(async(to, from, next) => {
       } else {
         try {
           // get user info
-          await store.dispatch('user/getInfo')
+          // userInfo是用于权限控制的，目前还不需要进行权限控制
+          // await store.dispatch('user/getInfo')
 
           next()
         } catch (error) {
