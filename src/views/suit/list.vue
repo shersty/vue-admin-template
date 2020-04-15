@@ -1,5 +1,5 @@
 <template>
-  <el-tabs v-model="activeName" class="main-tabs" type="border-card">
+  <el-tabs v-model="activeName" class="main-tabs" type="border-card" stretch>
     <el-tab-pane label="公交" name="busCard">
       <MySuitList :suit-list="busCardSuitList" />
     </el-tab-pane>
