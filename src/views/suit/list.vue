@@ -12,7 +12,7 @@
       />
     </el-table>
     <el-divider /> -->
-    <el-collapse accordion="true">
+    <el-collapse>
       <el-collapse-item
         v-for="suit in suitList"
         :key="suit.id"
