@@ -10,7 +10,7 @@
           <el-input v-model="suitForm.desc" maxlength="20" style="width: 60%" />
         </el-form-item>
         <el-form-item label="所属分组：" prop="group">
-          <el-select v-model="suitForm.group" placeholder="请选择suit分组">
+          <el-select v-model="suitForm.groupId" placeholder="请选择suit分组">
             <el-option label="公交" value="1" />
             <el-option label="门卡" value="0" />
           </el-select>
@@ -28,11 +28,11 @@
         </div>
         <!-- 添加执行该suit的用户 -->
         <template v-if="suitForm.changeUser">
-          <el-form-item label="用户名：" prop="username">
-            <el-input v-model="suitForm.username" maxlength="20" style="width: 60%" />
+          <el-form-item label="用户名：" prop="userName">
+            <el-input v-model="suitForm.userName" maxlength="20" style="width: 60%" />
           </el-form-item>
-          <el-form-item label="密码：" prop="password">
-            <el-input v-model="suitForm.password" maxlength="20" style="width: 60%" show-password />
+          <el-form-item label="密码：" prop="passWord">
+            <el-input v-model="suitForm.passWord" maxlength="20" style="width: 60%" show-password />
           </el-form-item>
         </template>
       </el-card>
@@ -52,14 +52,15 @@
 </template>
 
 <script>
+import { addSuit } from '../../api/suit'
 export default {
   data() {
     return {
       suitForm: {
         desc: '',
-        group: '1',
-        username: '3150039459',
-        password: 'nfc123456',
+        groupId: '1',
+        userName: '3150039459',
+        passWord: 'nfc123456',
         changeUser: false,
         run: false
       },
@@ -67,13 +68,13 @@ export default {
         desc: [
           { required: true, message: '请输入suit描述', trigger: 'change' }
         ],
-        group: [
+        groupId: [
           { required: true, trigger: 'blur' }
         ],
-        username: [
+        userName: [
           { required: true, trigger: 'blur' }
         ],
-        password: [
+        passWord: [
           { required: true, trigger: 'blur' }
         ],
         run: [
@@ -90,11 +91,11 @@ export default {
   watch: {
     changeUser: function() {
       if (this.suitForm.changeUser) {
-        this.suitForm.username = ''
-        this.suitForm.password = ''
+        this.suitForm.userName = ''
+        this.suitForm.passWord = ''
       } else {
-        this.suitForm.username = '3150039459'
-        this.suitForm.password = 'nfc123456'
+        this.suitForm.userName = '3150039459'
+        this.suitForm.passWord = 'nfc123456'
       }
     }
   },
@@ -102,7 +103,7 @@ export default {
     onSubmit(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          alert('submit!')
+          addSuit(this.suitForm)
         } else {
           console.log('err submit!')
           return false

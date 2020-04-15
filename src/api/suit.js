@@ -10,3 +10,17 @@ export function getSuitList() {
     }
   })
 }
+
+export function addSuit(suitInfo) {
+  return request({
+    url: 'suit/insert',
+    method: 'post',
+    data: {
+      desc: suitInfo.desc,
+      run: suitInfo.run,
+      userName: suitInfo.userName,
+      passWd: suitInfo.passWord,
+      groupId: suitInfo.groupId
+    }
+  })
+}

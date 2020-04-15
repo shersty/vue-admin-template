@@ -23,6 +23,7 @@ service.interceptors.request.use(
       // let each request carry token
       // ['X-Token'] is a custom headers key
       // please modify it according to the actual situation
+      console.log(getToken())
       config.headers['token'] = getToken()
     }
     return config
@@ -69,8 +70,14 @@ service.interceptors.response.use(
             location.reload()
           })
         })
+      } else if (res.code === 500101) {
+        console.log('参数异常')
+        MessageBox.alert(res.msg)
+      } else if (res.code === 500) {
+        console.log('服务器内部错误')
+        MessageBox.alert(res.message)
       }
-      return Promise.reject(new Error(res.message || 'Error'))
+      // return Promise.reject(new Error(res.message || 'Error'))
     } else {
       return res
     }
