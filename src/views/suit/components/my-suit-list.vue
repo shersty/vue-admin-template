@@ -32,6 +32,7 @@ export default {
     }
   },
   data() {
+    // 配置suit列表显示列
     this.colConfigs = [
       { prop: 'desc', label: '描述' },
       { prop: 'id', label: 'ID' }

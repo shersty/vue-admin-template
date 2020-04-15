@@ -1,12 +1,12 @@
 import request from '@/utils/request'
 
-export function getSuitList() {
+export function getSuitList(groupId) {
   return request({
     // url: '/vue-admin-template/suit/list',
     url: '/suit/queryByGroupId',
     method: 'post',
     data: {
-      groupId: 1
+      groupId: groupId
     }
   })
 }
