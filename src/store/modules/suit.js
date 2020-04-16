@@ -1,12 +1,21 @@
 import { getSuitList } from '@/api/suit'
 
 const state = {
-  suitList: ''
+  suitList: '',
+  apiAddFormVisible: false
 }
 
 const mutations = {
   SET_SUIT_LIST: (state, suitList) => {
     state.suitList = suitList
+  },
+  T_API_ADD_FORM: (state) => {
+    console.log('commit T_API_ADD_FORM begin ' + state.apiAddFormVisible)
+    state.apiAddFormVisible = true
+    console.log('commit T_API_ADD_FORM end ' + state.apiAddFormVisible)
+  },
+  F_API_ADD_FORM: (state) => {
+    state.apiAddFormVisible = false
   }
 }
 

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="suit-list-main-div">
     <el-collapse>
       <el-collapse-item
         v-for="suit in suitList"
@@ -25,17 +25,7 @@
         </div>
       </el-collapse-item>
     </el-collapse>
-    <el-dialog :title="'添加接口-' + selectSuitId + '-' + selectSuitDesc" :visible.sync="apiAddFormVisible" :modal-append-to-body="true">
-      <div slot="title" align="center">
-        <span>添加接口-{{ selectSuitId }}-{{ selectSuitDesc }}
-        </span>
-      </div>
-      <ApiForm />
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
-      </div>
-    </el-dialog>
+    <ApiForm :select-suit-id="selectSuitId" :select-suit-desc="selectSuitDesc" />
   </div>
 </template>
 
@@ -64,17 +54,29 @@ export default {
       { desc: '接口2', id: '2' }
     ]
     return {
-      apiAddFormVisible: false,
       selectSuitId: null,
-      selectSuitDesc: null
+      selectSuitDesc: null,
+      form: {
+        step: 1,
+        suit: null,
+        desc: '',
+        url: '',
+        method: 'POST',
+        params: '',
+        verify: '',
+        pendingdata: '',
+        storingdata: ''
+      }
     }
   },
   methods: {
     addApi(suitId, suitDesc) {
-      this.apiAddFormVisible = true
-      console.log('click add api')
       this.selectSuitId = suitId
       this.selectSuitDesc = suitDesc
+      this.$store.commit('suit/T_API_ADD_FORM')
+    },
+    addApiSubmit() {
+      alert('submit')
     }
   }
 }
@@ -84,5 +86,8 @@ export default {
 .in-list-button{
   margin-top: 20px;
   margin-right: 20px;
+}
+.suit-list-main-div{
+  position: relative;
 }
 </style>
