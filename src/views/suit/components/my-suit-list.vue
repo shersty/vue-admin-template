@@ -9,7 +9,7 @@
           <span>{{ suit.id }} | {{ suit.desc }}</span>
         </template>
         <el-table
-          :data="testApiList"
+          :data="apiList"
           style="width: 100%"
         >
           <el-table-column
@@ -40,14 +40,21 @@ export default {
   props: {
     suitList: {
       type: Array,
-      default: () => ({})
+      default: () => ([])
+    },
+    apiList: {
+      type: Array,
+      default: () => ([])
+
     }
   },
   data() {
     // 配置suit列表显示列
     this.colConfigs = [
+      { prop: 'id', label: 'ID' },
       { prop: 'desc', label: '描述' },
-      { prop: 'id', label: 'ID' }
+      { prop: 'url', label: 'URL' },
+      { prop: 'method', label: '请求方式' }
     ]
     this.testApiList = [
       { desc: '接口1', id: '1' },

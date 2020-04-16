@@ -43,3 +43,14 @@ export function addApiBySuitId(apiInfo, suitId) {
     }
   })
 }
+
+export function getApisBySuitId(suitId) {
+  console.log('start request to query apis of ' + suitId)
+  return request({
+    url: '/api/queryBySuitId',
+    method: 'post',
+    data: {
+      suitId: suitId
+    }
+  })
+}
