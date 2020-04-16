@@ -35,7 +35,7 @@
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
-      <el-button @click="addApiCancel">取 消</el-button>
+      <el-button @click="addApiCancel()">取 消</el-button>
       <el-button type="primary" @click="addApiSubmit('apiForm')">确 定</el-button>
     </div>
   </el-dialog>
@@ -88,11 +88,13 @@ export default {
   },
   methods: {
     addApiSubmit(formName) {
-      this.$store.commit('suit/F_API_ADD_FORM')
       this.$refs[formName].validate((valid) => {
         if (valid) {
           console.log('add api suit id is ' + this.selectSuitId)
           addApiBySuitId(this.apiForm, this.selectSuitId)
+          // 应该是提交成功才会自动关闭弹窗
+          this.$store.commit('suit/F_API_ADD_FORM')
+          this.$refs['apiForm'].resetFields()
         } else {
           console.log('add api submit error!')
           return false
@@ -100,7 +102,12 @@ export default {
       })
     },
     addApiCancel() {
-      this.$store.commit('suit/F_API_ADD_FORM')
+      // 暂时先用js的确认框提示吧，虽然有点丑陋
+      var quit = confirm('确定要退出吗？退出输入的内容就没有了哦')
+      if (quit === true) {
+        this.$store.commit('suit/F_API_ADD_FORM')
+        this.$refs['apiForm'].resetFields()
+      }
     }
   }
 }

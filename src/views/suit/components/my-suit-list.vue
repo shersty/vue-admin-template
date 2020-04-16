@@ -74,9 +74,6 @@ export default {
       this.selectSuitId = suitId
       this.selectSuitDesc = suitDesc
       this.$store.commit('suit/T_API_ADD_FORM')
-    },
-    addApiSubmit() {
-      alert('submit')
     }
   }
 }
