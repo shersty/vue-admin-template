@@ -46,6 +46,11 @@ module.exports = {
         target: 'http://10.236.102.200:8081',
         ws: true,
         changeOrigin: true
+      },
+      '^/api': {
+        target: 'http://10.236.102.200:8081',
+        ws: true,
+        changeOrigin: true
       }
     }
     // before: require('./mock/mock-server.js')
