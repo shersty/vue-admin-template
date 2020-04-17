@@ -28,10 +28,11 @@
                   <span>{{ props.row.id?"POST":"GET" }}</span>
                 </el-form-item>
                 <el-form-item label="入参">
-                  <span>{{ props.row.params }}</span>
+                  <pre>{{ props.row.params }}</pre>
+                  <!-- <span white-space: pre-wrap>{{ formatJson(props.row.params) }}</span> -->
                 </el-form-item>
                 <el-form-item label="校验字段">
-                  <span>{{ props.row.verify }}</span>
+                  <pre>{{ props.row.verify }}</pre>
                 </el-form-item>
                 <el-form-item label="请求处理字段">
                   <span>{{ props.row.pendingData }}</span>
@@ -167,6 +168,13 @@ export default {
   margin-right: 0;
   margin-bottom: 0;
   width: 50%;
+}
+
+.table-expand span{
+  margin-left: 50px;
+}
+.table-expand pre{
+  margin-left: 50px;
 }
 
 .suit-list-header {
