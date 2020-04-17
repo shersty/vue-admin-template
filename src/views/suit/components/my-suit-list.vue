@@ -6,12 +6,42 @@
         :key="suit.id"
       >
         <template slot="title">
-          <span>{{ suit.id }} | {{ suit.desc }}</span>
+          <span class="suit-list-header">{{ suit.id }} | {{ suit.desc }}</span>
         </template>
         <el-table
-          :data="suit.apis"
+          :data="suit.apiList"
           style="width: 100%"
         >
+          <el-table-column type="expand">
+            <template slot-scope="props">
+              <el-form label-position="right" class="table-expand" label-width="100px">
+                <el-form-item label="步骤编号">
+                  <span>{{ props.row.step }}</span>
+                </el-form-item>
+                <el-form-item label="接口描述">
+                  <span>{{ props.row.desc }}</span>
+                </el-form-item>
+                <el-form-item label="接口url">
+                  <span>{{ props.row.url }}</span>
+                </el-form-item>
+                <el-form-item label="请求方法">
+                  <span>{{ props.row.id?"POST":"GET" }}</span>
+                </el-form-item>
+                <el-form-item label="入参">
+                  <span>{{ props.row.params }}</span>
+                </el-form-item>
+                <el-form-item label="校验字段">
+                  <span>{{ props.row.verify }}</span>
+                </el-form-item>
+                <el-form-item label="请求处理字段">
+                  <span>{{ props.row.pendingData }}</span>
+                </el-form-item>
+                <el-form-item label="响应储存字段">
+                  <span>{{ props.row.storingData }}</span>
+                </el-form-item>
+              </el-form>
+            </template>
+          </el-table-column>
           <el-table-column
             v-for="{ prop, label } in colConfigs"
             :key="prop"
@@ -92,5 +122,22 @@ export default {
 }
 .suit-list-main-div{
   position: relative;
+}
+
+.table-expand {
+  font-size: 0;
+}
+.table-expand label {
+  width: 200px;
+  color: #68a0ee;
+}
+.table-expand .el-form-item {
+  margin-right: 0;
+  margin-bottom: 0;
+  width: 50%;
+}
+
+.suit-list-header {
+  font-size: 15px;
 }
 </style>
