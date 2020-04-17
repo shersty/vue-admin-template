@@ -52,6 +52,7 @@
         <div class="in-list-button" align="right">
           <el-button type="primary" icon="el-icon-edit" size="medium" circle />
           <el-button type="primary" icon="el-icon-plus" size="medium" circle @click="addApi(suit.id, suit.desc)" />
+          <el-button type="danger" icon="el-icon-delete" size="medium" circle @click="deleteSuit(suit.id, suit.desc)" />
         </div>
       </el-collapse-item>
     </el-collapse>
@@ -110,6 +111,25 @@ export default {
       this.selectSuitId = suitId
       this.selectSuitDesc = suitDesc
       this.$store.commit('suit/T_API_ADD_FORM')
+    },
+    deleteSuit(suitId, suitDesc) {
+      this.$confirm('此操作将会永久删除[ ' + suitDesc + ' ]以及对应api，是否继续？', '删除[ ' + suitDesc + ' ]', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        console.log('进行删除操作')
+        this.$message({
+          type: 'success',
+          message: '删除成功'
+        })
+      }).catch(() => {
+        console.log('取消删除操作')
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
+      })
     }
   }
 }
