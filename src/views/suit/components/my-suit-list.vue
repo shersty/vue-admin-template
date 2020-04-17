@@ -70,9 +70,9 @@ export default {
     ApiForm
   },
   props: {
-    suitList: {
-      type: Array,
-      default: () => ([])
+    groupId: {
+      type: Number,
+      default: 0
     }
   },
   data() {
@@ -90,6 +90,7 @@ export default {
     return {
       selectSuitId: null,
       selectSuitDesc: null,
+      suitList: [],
       form: {
         step: 1,
         suit: null,
@@ -104,8 +105,9 @@ export default {
     }
   },
   created() {
-    console.log('son suit')
-    console.log(this.suitList)
+    getSuitList(this.groupId).then((response) => {
+      this.suitList = response.data
+    })
   },
   methods: {
     addApi(suitId, suitDesc) {
@@ -122,11 +124,12 @@ export default {
         console.log('进行删除操作')
         deleteSuitBySuitId(suitId).then((response) => {
           console.log(response.data)
-          return getSuitList(suitGroupId)
-        }).then((response) => {
-          console.log('重新获取列表')
-          console.log(response.data)
-          // this.suitList = response.data
+          return (response.status)
+        }).then(() => {
+          getSuitList(this.groupId).then((resposne) => {
+            this.suitList = resposne.data
+          })
+          return []
         })
         this.$message({
           type: 'success',
