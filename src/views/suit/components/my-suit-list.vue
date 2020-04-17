@@ -9,7 +9,7 @@
           <span>{{ suit.id }} | {{ suit.desc }}</span>
         </template>
         <el-table
-          :data="apiList"
+          :data="suit.apis"
           style="width: 100%"
         >
           <el-table-column
@@ -41,17 +41,12 @@ export default {
     suitList: {
       type: Array,
       default: () => ([])
-    },
-    apiList: {
-      type: Array,
-      default: () => ([])
-
     }
   },
   data() {
     // 配置suit列表显示列
     this.colConfigs = [
-      { prop: 'id', label: 'ID' },
+      { prop: 'step', label: 'step' },
       { prop: 'desc', label: '描述' },
       { prop: 'url', label: 'URL' },
       { prop: 'method', label: '请求方式' }
@@ -75,6 +70,10 @@ export default {
         storingdata: ''
       }
     }
+  },
+  created() {
+    console.log('son suit')
+    console.log(this.suitList)
   },
   methods: {
     addApi(suitId, suitDesc) {
