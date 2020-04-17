@@ -52,7 +52,7 @@
         <div class="in-list-button" align="right">
           <el-button type="primary" icon="el-icon-edit" size="medium" circle />
           <el-button type="primary" icon="el-icon-plus" size="medium" circle @click="addApi(suit.id, suit.desc)" />
-          <el-button type="danger" icon="el-icon-delete" size="medium" circle @click="deleteSuit(suit.id, suit.desc)" />
+          <el-button type="danger" icon="el-icon-delete" size="medium" circle @click="deleteSuit(suit.id, suit.desc, suit.groupId)" />
         </div>
       </el-collapse-item>
     </el-collapse>
@@ -62,6 +62,7 @@
 
 <script>
 import ApiForm from './my-api-add-form'
+import { deleteSuitBySuitId, getSuitList } from '../../../api/suit'
 
 export default {
   name: 'SuitList',
@@ -112,13 +113,21 @@ export default {
       this.selectSuitDesc = suitDesc
       this.$store.commit('suit/T_API_ADD_FORM')
     },
-    deleteSuit(suitId, suitDesc) {
+    deleteSuit(suitId, suitDesc, suitGroupId) {
       this.$confirm('此操作将会永久删除[ ' + suitDesc + ' ]以及对应api，是否继续？', '删除[ ' + suitDesc + ' ]', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
         console.log('进行删除操作')
+        deleteSuitBySuitId(suitId).then((response) => {
+          console.log(response.data)
+          return getSuitList(suitGroupId)
+        }).then((response) => {
+          console.log('重新获取列表')
+          console.log(response.data)
+          // this.suitList = response.data
+        })
         this.$message({
           type: 'success',
           message: '删除成功'
